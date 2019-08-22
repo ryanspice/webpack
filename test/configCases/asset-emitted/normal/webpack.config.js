@@ -8,7 +8,7 @@ module.exports = {
 			compiler.hooks.afterEmit.tap("Test", () => {
 				expect(files).toMatchInlineSnapshot(`
 Object {
-  "1.bundle0.js": true,
+  "662.bundle0.js": true,
   "bundle0.js": true,
 }
 `);

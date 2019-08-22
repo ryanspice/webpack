@@ -11,7 +11,7 @@ module.exports = {
 		es6: true
 	},
 	parserOptions: {
-		ecmaVersion: 2017
+		ecmaVersion: 2018
 	},
 	rules: {
 		"prettier/prettier": "error",
@@ -28,7 +28,7 @@ module.exports = {
 		"no-extra-bind": "warn",
 		"no-process-exit": "warn",
 		"no-use-before-define": "off",
-		"no-unused-vars": ["error", { args: "none" }],
+		"no-unused-vars": ["error", { args: "none", ignoreRestSiblings: true }],
 		"no-unsafe-negation": "error",
 		"no-loop-func": "warn",
 		indent: "off",
@@ -55,12 +55,15 @@ module.exports = {
 		jsdoc: {
 			// supported tags https://github.com/microsoft/TypeScript-wiki/blob/master/JSDoc-support-in-JavaScript.md
 			tagNamePreference: {
-				...(['implements', 'const', 'memberof', 'readonly', 'yields'].reduce((acc, tag) => {
-					acc[tag] = {
-						message: `@${tag} currently not supported in Typescript`
-					};
-					return acc;
-				}, {})),
+				...["implements", "const", "memberof", "readonly", "yields"].reduce(
+					(acc, tag) => {
+						acc[tag] = {
+							message: `@${tag} currently not supported in Typescript`
+						};
+						return acc;
+					},
+					{}
+				),
 				extends: "extends",
 				return: "returns",
 				constructor: "constructor",
@@ -70,14 +73,14 @@ module.exports = {
 				description: false,
 				desc: false,
 				inheritdoc: false,
-				class: false
+				class: "constructor"
 			},
 			overrideReplacesDocs: false
 		}
 	},
 	overrides: [
 		{
-			files: ["lib/**/*.runtime.js", "buildin/*.js", "hot/*.js"],
+			files: ["lib/**/*.runtime.js", "hot/*.js"],
 			env: {
 				es6: false,
 				browser: true
